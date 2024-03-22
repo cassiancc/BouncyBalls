@@ -9,12 +9,14 @@
   "contact": {},
 
   "license": "MIT",
-  "icon": "icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
       "net.ninjadev.bouncyballs.fabric.BouncyBallsFabric"
+    ],
+    "client": [
+      "net.ninjadev.bouncyballs.fabric.BouncyBallsFabricClient"
     ]
   },
   "mixins": [
@@ -23,6 +25,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.15.7",
-    "minecraft": ">=1.20.4"
+    "minecraft": ">=1.20.4",
+    "architectury": ">=11.1.17"
   }
 }

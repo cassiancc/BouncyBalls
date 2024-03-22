@@ -36,7 +36,7 @@ public class BouncyBallEntity extends ThrownItemEntity {
     private static final TrackedData<ItemStack> STACK = DataTracker.registerData(BouncyBallEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
 
     public BouncyBallEntity(World world, LivingEntity owner) {
-        super(ModEntities.BOUNCY_BALL, owner, world);
+        super(ModEntities.BOUNCY_BALL.get(), owner, world);
     }
 
     public BouncyBallEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
@@ -45,7 +45,7 @@ public class BouncyBallEntity extends ThrownItemEntity {
 
     @Override
     protected Item getDefaultItem() {
-        return ModItems.RED_BOUNCY_BALL;
+        return ModItems.RED_BOUNCY_BALL.get();
     }
 
     @Override

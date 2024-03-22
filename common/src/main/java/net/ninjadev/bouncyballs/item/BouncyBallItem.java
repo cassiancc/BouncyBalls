@@ -19,7 +19,7 @@ import net.ninjadev.bouncyballs.init.ModItems;
 public class BouncyBallItem extends Item {
 
     public BouncyBallItem(DyeColor color) {
-        super(new Settings().maxCount(16));
+        super(new Settings().maxCount(16).arch$tab(ModItems.BOUNCY_BALLS_GROUP));
         this.color = color;
     }
 

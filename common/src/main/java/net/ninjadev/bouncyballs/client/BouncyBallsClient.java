@@ -1,10 +1,10 @@
 package net.ninjadev.bouncyballs.client;
 
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
+import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.client.color.item.ItemColorProvider;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.nbt.NbtCompound;
 import net.ninjadev.bouncyballs.client.render.entity.BouncyBallEntityRenderer;
 import net.ninjadev.bouncyballs.init.ModEntities;
@@ -14,21 +14,21 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public class BouncyBallsClient implements ClientModInitializer {
-    @Override
-    public void onInitializeClient() {
+public class BouncyBallsClient {
+
+    public static void init() {
         EntityRendererRegistry.register(ModEntities.BOUNCY_BALL, BouncyBallEntityRenderer::new);
 
-        for (Item item : ModItems.ITEMS) {
-            ColorProviderRegistry.ITEM.register(this.getItemColorProvider(), item);
+        for (RegistrySupplier<?> item : ModItems.ITEMS) {
+            ColorHandlerRegistry.registerItemColors(getItemColorProvider(), () -> (ItemConvertible) item.get());
         }
     }
 
     @NotNull
-    private ItemColorProvider getItemColorProvider() {
+    private static ItemColorProvider getItemColorProvider() {
         return (stack, tintIndex) -> {
             if (stack.getItem() instanceof BouncyBallItem ball) {
-                if (ball == ModItems.RAINBOW_BOUNCY_BALL) {
+                if (ball == ModItems.RAINBOW_BOUNCY_BALL.get()) {
                     NbtCompound nbt = stack.getOrCreateNbt();
                     if (nbt.contains("Life")) {
                         int life = nbt.getInt("Life");
