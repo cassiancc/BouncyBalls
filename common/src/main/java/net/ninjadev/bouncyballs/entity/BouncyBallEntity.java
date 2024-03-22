@@ -156,8 +156,12 @@ public class BouncyBallEntity extends ThrownItemEntity {
     private float getCoefficient(BlockState state) {
         boolean dampening = state.isIn(ModTags.DAMPENS_BOUNCE);
         boolean increasing = state.isIn(ModTags.INCREASES_BOUNCE);
+        boolean infinibounce = state.isIn(ModTags.INFINIBOUNCE);
+
+        if (infinibounce) return 1.0f;
         if (dampening) return 0.075f;
         if (increasing) return .95f;
+
         return 0.85f;
     }
 
