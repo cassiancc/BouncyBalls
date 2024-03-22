@@ -10,6 +10,9 @@ import java.util.function.Supplier;
 
 public class BouncyBalls
 {
+
+	public static final String MC_VERSION = "1.20.4";
+	public static final String MOD_VERSION = "1.0.1";
 	public static final String MOD_ID = "bouncyballs";
 	public static final Supplier<RegistrarManager> REGISTRY_MANAGER = Suppliers.memoize(() -> RegistrarManager.get(BouncyBalls.MOD_ID));
 

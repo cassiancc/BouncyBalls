@@ -3,7 +3,6 @@ package net.ninjadev.bouncyballs.fabric;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientLoginNetworking;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.PacketByteBuf;
 import net.ninjadev.bouncyballs.BouncyBalls;
 import net.ninjadev.bouncyballs.client.BouncyBallsClient;
@@ -16,22 +15,10 @@ public class BouncyBallsFabricClient implements ClientModInitializer {
 
         ClientLoginNetworking.registerGlobalReceiver(BouncyBalls.id("version_check"), (client, handler, buf, listenerAdder) -> {
             PacketByteBuf out = new PacketByteBuf(Unpooled.buffer());
-            StringBuilder sb = new StringBuilder();
-            FabricLoader.getInstance().getModContainer(BouncyBalls.MOD_ID).ifPresent(modContainer -> {
-                sb.append(modContainer.getMetadata().getVersion());
-                sb.append(":");
-                sb.append(parseClientVersion(client.getGameVersion()));
-            });
-
-            String clientVersion = sb.toString();
-            out.writeString(clientVersion);
+            out.writeString(BouncyBalls.MOD_VERSION + ":" + BouncyBalls.MC_VERSION);
             return CompletableFuture.completedFuture(out);
         });
 
         BouncyBallsClient.init();
-    }
-
-    private static String parseClientVersion(String gameVersion) {
-        return gameVersion.split("-")[3];
     }
 }

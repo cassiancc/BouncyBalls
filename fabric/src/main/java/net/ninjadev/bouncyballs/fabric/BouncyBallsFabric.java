@@ -17,7 +17,7 @@ public class BouncyBallsFabric implements ModInitializer {
 
         ServerLoginConnectionEvents.QUERY_START.register((handler, server, sender, synchronizer) -> {
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-            buf.writeString(getServerVersion(server));
+            buf.writeString(BouncyBalls.MOD_VERSION + ":" + BouncyBalls.MC_VERSION);
             sender.sendPacket(BouncyBalls.id("version_check"), buf);
         });
 
@@ -29,7 +29,7 @@ public class BouncyBallsFabric implements ModInitializer {
 
             synchronizer.waitFor(server.submit(() -> {
                 String clientVersion = buf.readString();
-                String serverVersion = getServerVersion(server);
+                String serverVersion = BouncyBalls.MOD_VERSION + ":" + BouncyBalls.MC_VERSION;
                 if (!serverVersion.equalsIgnoreCase(clientVersion)) {
                     handler.disconnect(Text.literal("BouncyBalls version mismatch: Server=%s, Client=%s".formatted(serverVersion, clientVersion)));
                 }
@@ -37,16 +37,5 @@ public class BouncyBallsFabric implements ModInitializer {
         });
 
         BouncyBalls.init();
-    }
-
-    @NotNull
-    private static String getServerVersion(MinecraftServer server) {
-        StringBuilder sb = new StringBuilder();
-        FabricLoader.getInstance().getModContainer(BouncyBalls.MOD_ID).ifPresent(modContainer -> {
-            sb.append(modContainer.getMetadata().getVersion());
-            sb.append(":");
-            sb.append(server.getVersion());
-        });
-        return sb.toString();
     }
 }
