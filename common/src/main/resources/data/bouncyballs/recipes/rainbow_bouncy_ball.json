@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "s": {
+      "item": "minecraft:slime_ball"
+    },
+    "d": {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "pattern": [
+    " s ",
+    "sds",
+    " s "
+  ],
+  "result": {
+    "count": 1,
+    "item": "bouncyballs:black_bouncy_ball"
+  }
+}

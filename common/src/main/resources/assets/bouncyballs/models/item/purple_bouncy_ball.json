@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bouncyballs:item/bouncy_ball"
+  }
+}

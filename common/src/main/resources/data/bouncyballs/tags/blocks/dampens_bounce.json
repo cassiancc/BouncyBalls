@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:wool",
+    "#minecraft:wool_carpets",
+    "#minecraft:leaves",
+    "#minecraft:beds",
+    "#minecraft:dirt",
+    "#minecraft:concrete_powder",
+    "#minecraft:snow",
+    "#minecraft:sand",
+	"minecraft:dirt_path",
+	"minecraft:farmland"
+  ]
+}
