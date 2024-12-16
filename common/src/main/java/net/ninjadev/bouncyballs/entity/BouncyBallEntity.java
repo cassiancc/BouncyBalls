@@ -112,7 +112,7 @@ public class BouncyBallEntity extends ThrownItemEntity {
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
-        if (this.isInFluid() && blockHitResult.getSide() == Direction.UP) {
+        if (this.isInsideWaterOrBubbleColumn() && blockHitResult.getSide() == Direction.UP) {
             this.setVelocity(Vec3d.ZERO);
             return;
         }
@@ -131,7 +131,7 @@ public class BouncyBallEntity extends ThrownItemEntity {
         Vec3d reflectionVector = new Vec3d(velocity.x - 2 * dotProduct * normal.x, velocity.y - 2 * dotProduct * normal.y, velocity.z - 2 * dotProduct * normal.z);
         reflectionVector = reflectionVector.multiply(this.getAndDecrementBounce(this.getCoefficient(state)));
         this.setVelocity(reflectionVector);
-        if (!this.getWorld().isClient && !this.isInFluid()) {
+        if (!this.getWorld().isClient && !this.isInsideWaterOrBubbleColumn()) {
             ServerWorld world = (ServerWorld) this.getWorld();
             world.playSound(this, this.getBlockPos(),
                     SoundEvents.ENTITY_SLIME_SQUISH_SMALL, SoundCategory.NEUTRAL,
